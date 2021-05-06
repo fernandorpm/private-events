@@ -17,6 +17,15 @@
     <% if alert%>
       <%= alert%>
     <% end%>
+    <%= logged_user %>
+    <br>
+    <% if session[:name].nil? %>
+      <%= link_to "Register", new_user_path %> |
+      <%= link_to "Log In", login_path %>
+    <% else %>
+      <%= link_to "Log Out", sessions_logout_path, method: :delete %>
+    <% end %>
+    <hr>
     <%= yield %>
   </body>
 </html>

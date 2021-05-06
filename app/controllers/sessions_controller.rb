@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def login
-   @user
+    
   end
 
   def logged_in
@@ -8,42 +8,28 @@ class SessionsController < ApplicationController
   end
 
   def logout
-
+    session.clear
+    redirect_to users_path
   end
   
   private
-  def set_name
-      
-  end
 
   def user_param
     lf = params[:login_field]
+    
     if lf =~ /\d/
-      begin
-        @user = User.find(login_id: lf).first
-        p "======================"
-        p @user.name
-        session[:login_id] = @user.login_id
-        session[:name] = @user.name
-        redirect_to users_path
-
-        # save session
-      rescue
-        # redirect to login
-        redirect_to sessions_login_path
-      end
+      @user = User.where(login_id: lf)
     else
-      begin
-        @user = User.find(name: lf).first
-        session[:login_id] = @user.login_id
-        session[:name] = @user.name
-        redirect_to users_path
-
-        # save session
-      rescue
-        # redirect to login
-        redirect_to sessions_login_path
-      end
+      @user = User.where(name: lf)
     end
+
+    if @user.empty?
+      redirect_to login_path
+    else
+      session[:login_id] = @user.first.login_id
+      session[:name] = @user.first.name
+      redirect_to users_path
+    end
+
   end
 end
