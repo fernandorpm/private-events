@@ -1,0 +1,5 @@
+<%= form_tag('/sessions/logged_in', :method => "post") do %>
+  <%= label_tag(:login_field, "Enter name or login ID: ") %>
+  <%= text_field_tag(:login_field) %>
+  <%= submit_tag("Login") %>
+<% end %>
