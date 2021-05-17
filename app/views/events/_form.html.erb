@@ -1,0 +1,22 @@
+<%= form_with(model: @event, local: true) do |form| %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :event_name, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.text_field :event_location, class: 'form-control' %>
+  </div>
+  
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.datetime_field :event_date, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create Event', class: 'btn btn-lg text-light bg-dark a-l' %>
+  </div>
+<% end %>

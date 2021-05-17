@@ -1,11 +1,15 @@
+<div class='com-back'>
+<%if current_user%>
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
 </p>
-
 <p>
   <strong>Login Id:</strong>
   <%= @user.login_id %>
 </p>
+<%end%>
 
 <%= link_to 'Back', root_path %>
+
+</div>

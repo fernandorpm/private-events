@@ -17,6 +17,8 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+
+# gem 'devise'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -38,6 +40,8 @@ group :development, :test do
   gem 'selenium-webdriver'
 
 end
+
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

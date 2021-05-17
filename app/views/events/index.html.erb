@@ -1,0 +1,30 @@
+<%if current_user%>
+<h1>Event pills</h1>
+<p>Create and book your events</p>
+  <table class='table table-hover'>
+  <thead>
+  <tr>
+    <th scope='col'>S/N</th>
+    <th scope='col'>Your event</th>
+    <th scope='col'>Event happens</th>
+    <th scope='col'>Event Location</th>
+    <th scope='col'>Created at</th>
+    <th scope='col'></th>
+  </tr>
+  </thead>
+  <tbody>
+   <% @events.each do |item| %>
+  <tr>
+    <th scope='row'><%=item.id%></th>
+    <td><%= item.event_name%></td>
+    <td><%= item.event_date%></td>
+    <td><%= item.event_location%></td>
+    <td><%= item.created_at%></td>
+    <td><%= link_to 'Delete', item, method: :delete, data: {confirm: 'Are you sure'} %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+<%else%>
+  redirect_to '/login'
+<%end%>
