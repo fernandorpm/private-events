@@ -9,9 +9,9 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = current_user.hosted_events.build(event_params)
+        @event = current_user.hoster_events.build(event_params)
         if @event.save
-            redirect_to root_path, notice: 'Event has been created'
+            redirect_to @event, notice: 'Event has been created'
         else
             render 'new', notice: 'Try again'
         end
@@ -22,17 +22,26 @@ class EventsController < ApplicationController
     end
 
     def show
-        # @event = Event.find_by(params[:id])
+        @event = Event.find(params[:id])
     end
 
-    def my_events
-        @event = current_user.hosted_events.first
+    def edit
+        @event = Event.find(params[:id])
+    end
+
+    def update
+        @event = Event.find(params[:id])
+        if @event.update(event_params)
+          redirect_to @event, notice: "Your event was updated"
+        else
+          render :edit
+        end
     end
 
     def destroy
         @event = Event.find_by(params[:id])
         @event.destroy
-        redirect_to root_path
+        redirect_to events_path
     end
 
     private

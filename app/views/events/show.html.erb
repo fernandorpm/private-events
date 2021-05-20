@@ -1,2 +1,18 @@
-<h1><%= current_user.name%>  Event</h1>
-<h2><%= @event%></h2>
+<h1><%= current_user.name%>  Event here</h1>
+<% if @event.event_date < Time.now %>
+  <p>Sorry, you cannot attend this event again because it has already <b>PAST</b></p>
+<% end %>
+
+<% if current_user == @event.hoster %>
+  <p>You are this event hoster</p>
+<% elsif @event.attendees.include?(current_user) %>
+  <p>You are in line to attend this event</p>
+<% else %>
+  <p>You are missing this event</p>
+  
+<% end %>
+
+<p><%= @event.event_name%></p>
+<p><%= @event.event_location%></p>
+<p><%= @event.event_date%></p>
+<%= link_to 'Back to event', events_path %>

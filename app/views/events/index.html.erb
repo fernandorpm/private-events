@@ -1,6 +1,30 @@
 <%if current_user%>
-<h1>Event pills</h1>
-<p>Create and book your events</p>
+<h1>Upcoming Events</h1>
+<% Event.future.each do |event|%>
+  <p>Event Name: <%= event.event_name%></p>
+  <p>Event Name: <%= event.event_location%></p>
+  <p>Event Name: <%= event.event_date%></p>
+  <%= link_to 'About', event_path(event) %>
+<% end %>
+
+
+<hr/>
+<h1 class="text-muted">PAST EVENTS</h1>
+<% Event.past.each do |event|%>
+  <p>Event Name: <%= event.event_name%></p>
+  <p>Event Name: <%= event.event_location%></p>
+  <p>Event Name: <%= event.event_date%></p>
+  <%= link_to 'About', event_path(event) %>
+<% end %>
+<hr style='background: white'>
+<%= link_to 'Add Event', new_event_path %>
+<%else%>
+  redirect_to '/login'
+<%end%>
+
+
+ <%#
+ 
   <table class='table table-hover'>
   <thead>
   <tr>
@@ -13,18 +37,16 @@
   </tr>
   </thead>
   <tbody>
-   <% @events.each do |item| %>
+    @events.each do |item|
   <tr>
-    <th scope='row'><%=item.id%></th>
-    <td><%= item.event_name%></td>
-    <td><%= item.event_date%></td>
-    <td><%= item.event_location%></td>
-    <td><%= item.created_at%></td>
-    <td><%= link_to 'Delete', item, method: :delete, data: {confirm: 'Are you sure'} %></td>
+    <th scope='row'><%=item.id</th>
+    <td><%= item.event_name</td>
+    <td><%= item.event_date</td>
+    <td><%= item.event_location></td>
+    <td><%= item.created_at></td>
+    <td><%= link_to 'Delete', item, method: :delete, data: {confirm: 'Are you sure'} </td>
   </tr>
-<% end %>
+<% end >
   </tbody>
 </table>
-<%else%>
-  redirect_to '/login'
-<%end%>
+ %> 

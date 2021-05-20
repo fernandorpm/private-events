@@ -6,6 +6,7 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.date :event_date
       t.string :event_location
 
+      t.belongs_to :hoster, foreign_key: { to_table: :users}, index: true, null: false
       t.timestamps
     end
   end
