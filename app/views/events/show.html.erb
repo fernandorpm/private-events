@@ -5,7 +5,7 @@
 
 <% if current_user == @event.hoster %>
   <%= link_to 'Edit', edit_event_path, class: "btn btn-outline-secondary" %>
-  <%= link_to 'Delete', event_path, method: :delete, class: "btn btn-outline-secondary m-3", data: { confirm: "Delete this event?"} %>
+  <%= link_to 'Delete', event_path(@event), method: :delete, class: "btn btn-outline-secondary m-3", data: { confirm: "Delete this event?"} %>
 <% elsif @event.attendees.include?(current_user) %>
   <%= link_to 'Cancel RSVP', cancel_rsvp_event_path, class: "btn btn-outline-secondary m-3" %>
 <% else %>

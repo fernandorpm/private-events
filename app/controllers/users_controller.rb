@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  
-  before_action :require_login, only: [:show, :destroy, :index]
+  before_action :require_login, only: %i[show destroy index]
 
   # GET /users or /users.json
   def index
@@ -11,7 +10,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-
 
   # GET /users/new
   def new
@@ -32,8 +30,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        
-        format.html { redirect_to @user, notice: "User was successfully created." }
+
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,18 +41,19 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    # def set_user
-    #   @user = User.find(params[:id])
-    # end
 
-    def correct_user?
-      user = User.find(params[:id])
-      user == current_user
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  # def set_user
+  #   @user = User.find(params[:id])
+  # end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:name, :login_id)
-    end
+  def correct_user?
+    user = User.find(params[:id])
+    user == current_user
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:name, :login_id)
+  end
 end

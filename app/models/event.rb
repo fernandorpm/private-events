@@ -1,7 +1,6 @@
 class Event < ApplicationRecord
-
   validates :event_name, :event_date, :event_location, presence: true
-  # validates :event_name, uniqueness: true 
+  # validates :event_name, uniqueness: true
   validates :event_name, :event_location, length: { minimum: 4 }
 
   belongs_to :hoster, class_name: 'User'
@@ -10,5 +9,4 @@ class Event < ApplicationRecord
 
   scope :past, -> { where('event_date < ?', Date.today).order(event_date: :desc) }
   scope :future, -> { where('event_date > ?', Date.today).order(:event_date) }
-
 end
