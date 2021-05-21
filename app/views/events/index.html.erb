@@ -1,52 +1,41 @@
 <%if current_user%>
 <h1>Upcoming Events</h1>
-<% Event.future.each do |event|%>
-  <p>Event Name: <%= event.event_name%></p>
-  <p>Event Name: <%= event.event_location%></p>
-  <p>Event Name: <%= event.event_date%></p>
-  <%= link_to 'About', event_path(event) %>
-<% end %>
+
+<div class='event-card'>
+  <% Event.future.each do |event| %>
+  <div class="event-head">
+    <h1>Event: <%= event.event_name%></h1>
+  </div>
+  <div class="event-body">
+    <p>Happening at: <%= event.event_location%></p>
+    <p>Date: <%= event.event_date%></p>
+    <small>Created at <%= event.created_at%> </small>
+    <%= link_to 'About', event_path(event) %>
+  </div>
+  <% end %>
+</div>
 
 
-<hr/>
-<h1 class="text-muted">PAST EVENTS</h1>
-<% Event.past.each do |event|%>
-  <p>Event Name: <%= event.event_name%></p>
-  <p>Event Name: <%= event.event_location%></p>
-  <p>Event Name: <%= event.event_date%></p>
-  <%= link_to 'About', event_path(event) %>
-<% end %>
-<hr style='background: white'>
+<hr style='background: white; height: 30px'>
+
+<h1>Past Events</h1>
+<div class='event-card'>
+  <% Event.past.each do |event| %>
+  <div class="event-head">
+    <h1>Event: <%= event.event_name%></h1>
+  </div>
+  <div class="event-body">
+    <p>Happening at: <%= event.event_location%></p>
+    <p>Date: <%= event.event_date%></p>
+    <small>Created at <%= event.created_at%> </small>
+    <%= link_to 'About', event_path(event) %>
+  </div>
+  <% end %>
+</div>
+
 <%= link_to 'Add Event', new_event_path %>
 <%else%>
   redirect_to '/login'
 <%end%>
 
 
- <%#
- 
-  <table class='table table-hover'>
-  <thead>
-  <tr>
-    <th scope='col'>S/N</th>
-    <th scope='col'>Your event</th>
-    <th scope='col'>Event happens</th>
-    <th scope='col'>Event Location</th>
-    <th scope='col'>Created at</th>
-    <th scope='col'></th>
-  </tr>
-  </thead>
-  <tbody>
-    @events.each do |item|
-  <tr>
-    <th scope='row'><%=item.id</th>
-    <td><%= item.event_name</td>
-    <td><%= item.event_date</td>
-    <td><%= item.event_location></td>
-    <td><%= item.created_at></td>
-    <td><%= link_to 'Delete', item, method: :delete, data: {confirm: 'Are you sure'} </td>
-  </tr>
-<% end >
-  </tbody>
-</table>
- %> 

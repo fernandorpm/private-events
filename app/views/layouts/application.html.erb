@@ -27,7 +27,7 @@
     </li>
 
     <li class='nav-item'>
-    <%= link_to 'See my Events', events_path, class: 'text-primary nav-link text-sm-center' %>
+    <%= link_to 'See my Events', my_event_event_path(current_user), class: 'text-primary nav-link text-sm-center' %>
     </li>
     <h3>Signed in as <%= current_user.name%></h3>
     <%else%>

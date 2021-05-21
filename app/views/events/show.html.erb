@@ -4,15 +4,33 @@
 <% end %>
 
 <% if current_user == @event.hoster %>
-  <p>You are this event hoster</p>
+  <%= link_to 'Edit', edit_event_path, class: "btn btn-outline-secondary" %>
+  <%= link_to 'Delete', event_path, method: :delete, class: "btn btn-outline-secondary m-3", data: { confirm: "Delete this event?"} %>
 <% elsif @event.attendees.include?(current_user) %>
-  <p>You are in line to attend this event</p>
+  <%= link_to 'Cancel RSVP', cancel_rsvp_event_path, class: "btn btn-outline-secondary m-3" %>
 <% else %>
-  <p>You are missing this event</p>
-  
+  <%= link_to 'RSVP', rsvp_event_path, class: "btn btn-primary m-3" unless @event.event_date < Time.now %>
 <% end %>
 
-<p><%= @event.event_name%></p>
-<p><%= @event.event_location%></p>
-<p><%= @event.event_date%></p>
-<%= link_to 'Back to event', events_path %>
+<div class="card border-success m-4" style="max-width: 18rem;">
+  <div class="card-header bg-primary border-success">Created by <%= link_to @event.hoster.name, user_path(@event.hoster) %></div>
+  <div class="card-body text-success">
+    <h5 class="card-title bg-primary text-dark p-2 bg-light text-dark">Event: <%= @event.event_name%></h5>
+    <p class="card-text">Location: <%= @event.event_location%>.</p>
+    <p class="card-text">Date: <%= @event.event_date%>.</p>
+  </div>
+  <div class="card-footer bg-primary border-success"><%= link_to 'Back to event', events_path, class: 'p-2 bg-light text-dark' %>
+</div>
+</div>
+
+<h1>Attendees list</h1>
+<% if @event.attendees.empty? %>
+  <h6>There are no attendees yet</h6>
+<% else %>
+  <% @event.attendees.each do |attendees| %>
+    <h5 class='bg-primary'><%= attendees.name%></h5>
+  <% end %>
+<% end %>
+
+
+

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :events
-  # post '/events', to: 'events#create'
+  resources :events do
+    member do
+      get 'rsvp'
+      get 'cancel_rsvp'
+      get 'my_event', to: 'events#my_event'
+    end
+  end  # post '/events', to: 'events#create'
   resources :users #only: [:index, :create]
   
   get '/login', to: 'sessions#new'
