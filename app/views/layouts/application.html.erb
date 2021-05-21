@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PrivateEvents</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+   
+    <%# <nav class='navbar navbar-light navbar-expand-lg bg-primary'> %>
+    <ul class='nav nav-tab bg-mute p-2 my-4 border navbar-expand-sm'>
+    <%if current_user%>
+    <li class='nav-item'>
+    <%= link_to 'Sign out', logout_path, method: :get, class: 'text-primary nav-link text-sm-center' %>
+    </li>
+
+    <li class='nav-item'>
+    <%= link_to 'All Events', events_url, method: :get, class: 'text-primary nav-link text-sm-center' %>
+    </li>
+    <li class='nav-item'>
+    <%= link_to 'Add Events', new_event_path, method: :get, class: 'text-primary nav-link text-sm-center' %>
+    </li>
+
+    <li class='nav-item'>
+    <%= link_to 'See my Events', my_event_event_path(current_user), class: 'text-primary nav-link text-sm-center' %>
+    </li>
+    <h3>Signed in as <%= current_user.name%></h3>
+    <%else%>
+    <li class='nav-item'>
+    <%= link_to 'Sign up', new_user_path, class: 'text-primary nav-link text-sm-center' %>
+    </li>
+    <li class='nav-item'>
+    <%= link_to 'Home', root_path, class: 'text-primary nav-link text-sm-center' %>
+    </li>
+    <li class='nav-item'>
+    <%= link_to 'Sign in', login_path, class: 'text-primary nav-link text-sm-center' %>
+    </li>
+    <%end%> 
+    </ul>
+
+    <% if notice%>
+      <p class='notice'><%= notice%></p>
+    <% end%>
+    
+    <% if flash%>
+      <% flash.each do |f, m|%
+        <%= m%>
+      <%end%>
+    <% end %>
+    <div class='container'>
+    <%= yield %>
+    </div>
+    <%# <%= debug(params) if Rails.env.development? %>
+  </body>
+</html>

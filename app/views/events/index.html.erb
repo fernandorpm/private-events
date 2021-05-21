@@ -1,0 +1,41 @@
+<%if current_user%>
+<h1>Upcoming Events</h1>
+
+<div class='event-card'>
+  <% Event.future.each do |event| %>
+  <div class="event-head">
+    <h1>Event: <%= event.event_name%></h1>
+  </div>
+  <div class="event-body">
+    <p>Happening at: <%= event.event_location%></p>
+    <p>Date: <%= event.event_date%></p>
+    <small>Created at <%= event.created_at%> </small>
+    <%= link_to 'About', event_path(event) %>
+  </div>
+  <% end %>
+</div>
+
+
+<hr style='background: white; height: 30px'>
+
+<h1>Past Events</h1>
+<div class='event-card'>
+  <% Event.past.each do |event| %>
+  <div class="event-head">
+    <h1>Event: <%= event.event_name%></h1>
+  </div>
+  <div class="event-body">
+    <p>Happening at: <%= event.event_location%></p>
+    <p>Date: <%= event.event_date%></p>
+    <small>Created at <%= event.created_at%> </small>
+    <%= link_to 'About', event_path(event) %>
+  </div>
+  <% end %>
+</div>
+
+<%= link_to 'Add Event', new_event_path %>
+<%else%>
+  redirect_to '/login'
+<%end%>
+
+

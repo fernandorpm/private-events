@@ -1,0 +1,11 @@
+<% @event.each do |event| %>
+<div class="card border-success m-4" style="max-width: 18rem;">
+  <div class="card-header bg-primary border-success">Created by <%= link_to event.hoster.name, user_path(event.hoster) %></div>
+  <div class="card-body text-success">
+    <h5 class="card-title bg-primary text-dark p-2 bg-light text-dark">Event: <%= event.event_name%></h5>
+    <p class="card-text">Location: <%= event.event_location%>.</p>
+    <p class="card-text">Date: <%= event.event_date%>.</p>
+  </div>
+  <div class="card-footer bg-primary border-success"><%= link_to 'Back to event', events_path, class: 'p-2 bg-light text-dark' %>
+</div>
+</div><% end %>
